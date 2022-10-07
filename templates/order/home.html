@@ -1,0 +1,28 @@
+{% extends "boilerplate.html" %} {% block title %} {{ super() }} 추천 메뉴 {%
+endblock %} {% block body %}
+<div class="container recommendation text-center">
+  <h2 class="mt-5">★ 추천 메뉴 ★</h2>
+  <div class="row text-center">
+    {% for menu in recMenus %}
+    <div class="card col-md-4 mx-auto mt-3" style="width: 18rem">
+      <img src="{{ menu.img }}" class="card-img-top" alt="..." />
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ menu.name }}</h5>
+        <p class="card-text">{{ menu.compose }}</p>
+        <p class="card-text text-bold">₩ {{ menu.price }}</p>
+        <a href="/order/specific/{{ menu._id }}" class="btn btn-primary"
+          >선택</a
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-center">
+    <a href="/order/recommend"
+      ><button class="mt-5 mb-5 btn btn-primary addRecommendedMenu">
+        더보기
+      </button></a
+    >
+  </div>
+</div>
+{% include "/partials/event.html" %} {% endblock %}
