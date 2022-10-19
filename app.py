@@ -1,12 +1,10 @@
 import requests
 from controller import order_controller
-
 from flask import *
 from flask_restx import Api, Resource
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 app = Flask(__name__, template_folder="templates")
-
 app.register_blueprint(order_controller.order_router, url_prefix="/order")
 
 @app.route('/index')
