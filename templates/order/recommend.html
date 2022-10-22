@@ -7,9 +7,8 @@
       <img src="{{menu.img}}" class="card-img-top" alt="..." />
       <div class="card-body text-center">
         <h5 class="card-title">{{menu.name}}</h5>
-        <p class="card-text">{{menu.compose}}</p>
         <p class="card-text text-bold">₩ {{menu.price}}</p>
-        <a href="/order/specific/{{menu._id}}" class="btn btn-primary">선택</a>
+        <a href="/order/item/{{menu._id}}" class="btn btn-primary">선택</a>
       </div>
     </div>
     {% endfor %}

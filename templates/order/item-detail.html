@@ -1,0 +1,51 @@
+{% extends "boilerplate.html" %} {% block body %}
+<div class="container recommendation text-center">
+  <h2 class="mt-5">주문하기</h2>
+  <div class="row text-center">
+    <div class="card col-md-4 mx-auto mt-3" style="width: 36rem">
+      <form action="#" method="POST">
+        <img src="{{item.img}}" class="card-img-top" alt="..." />
+        <div class="card-body text-center">
+          <h5 class="card-title">{{item.name}}</h5>
+          <p class="card-text">{{item.composed}}</p>
+          <p class="card-text text-bold">₩ {{item.price}}</p>
+          <label for="amount">수량</label>
+          <input
+            type="number"
+            value="1"
+            name="amount"
+            id="amount"
+            min="1"
+            max="10"
+          />
+          <div
+            class="btn-group-vertical"
+            role="group"
+            aria-label="Vertical button group"
+          >
+            <button type="button" class="btn btn-primary amount-up">+</button>
+            <button type="button" class="btn btn-primary amount-down">-</button>
+          </div>
+          <br />
+          <a href="/order/{{item.id}}" class="btn btn-primary">결제하기</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  const amountUpButton = document.querySelector(".amount-up");
+  const amountDownButton = document.querySelector(".amount-down");
+  let amount = document.querySelector("#amount");
+
+  amountUpButton.addEventListener("click", () => {
+    amount.value++;
+  });
+
+  amountDownButton.addEventListener("click", () => {
+    if (amount.value > 1) {
+      amount.value--;
+    }
+  });
+</script>
+{% endblock %}

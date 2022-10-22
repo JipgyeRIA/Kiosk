@@ -7,6 +7,7 @@ import cv2;
 
 order_router = Blueprint('order', __name__, template_folder="templates")
 server_url = "http://localhost:3000";
+# server_url = "https://jipgyeria.herokuapp.com"
 cam_stream = cv2.VideoCapture(0)
 
 @order_router.route('/home')
@@ -17,6 +18,17 @@ def renderHome():
   path = result['path']
   
   return render_template('order/home.html', recMenus=recMenus, path=path)
+
+@order_router.get('/item/<item_id>')
+def renderItemDetail(item_id):
+  print("ORDER!!!!")
+  response = requests.get(server_url + "/order/item/" + item_id)
+  result = response.json()
+  item = result['item']
+  path = result['path']
+  print(result)
+
+  return render_template('order/item-detail.html', item=item, path=path)
 
 @order_router.route('/recommend/all')
 def renderRecommendHome():
