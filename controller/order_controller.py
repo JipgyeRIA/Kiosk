@@ -16,8 +16,10 @@ def renderHome():
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  page = result['page']
+  maxPage = result['maxPage']
   
-  return render_template('order/home.html', recMenus=recMenus, path=path)
+  return render_template('order/home.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.get('/item/<item_id>')
 def renderItemDetail(item_id):
@@ -26,9 +28,11 @@ def renderItemDetail(item_id):
   result = response.json()
   item = result['item']
   path = result['path']
+  page = result['page']
+  maxPage = result['maxPage']
   print(result)
 
-  return render_template('order/item-detail.html', item=item, path=path)
+  return render_template('order/item-detail.html', item=item, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/all')
 def renderRecommendHome():
@@ -36,8 +40,10 @@ def renderRecommendHome():
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  page = result['page']
+  maxPage = result['maxPage']
   
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/set-menu')
 def renderSetMenuHome():
@@ -45,8 +51,10 @@ def renderSetMenuHome():
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  page = result['page']
+  maxPage = result['maxPage']
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/single-menu')
 def renderSingleMenuHome():
@@ -54,8 +62,10 @@ def renderSingleMenuHome():
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  page = result['page']
+  maxPage = result['maxPage']
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/side-menu')
 def renderSideMenuHome():
@@ -63,8 +73,10 @@ def renderSideMenuHome():
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  page = result['page']
+  maxPage = result['maxPage']
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/group')
 def getGroupRecommendMenu():
@@ -74,8 +86,10 @@ def getGroupRecommendMenu():
     result = response.json()
     recMenus = result['recMenus']
     path = result['path']
+    page = result['page']
+    maxPage = result['maxPage']
     
-    return render_template('order/recommend.html', recMenus=recMenus, path=path)
+    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
   
   else:
     print("emb입니당 ", emb)
@@ -84,5 +98,7 @@ def getGroupRecommendMenu():
     result = response.json()
     recMenus = result['recMenus']
     path = result['path']
+    page = result['page']
+    maxPage = result['maxPage']
     
-    return render_template('order/recommend.html', recMenus=recMenus, path=path)
+    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)

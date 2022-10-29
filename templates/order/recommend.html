@@ -4,7 +4,7 @@
   <div class="row text-center">
     {% for menu in recMenus %}
     <div class="card col-md-4 mx-auto mt-3" style="width: 18rem">
-      <img src="{{menu.img}}" class="card-img-top" alt="..." />
+      <img src="/static/img/{{menu.img}}" class="card-img-top" alt="..." />
       <div class="card-body text-center">
         <h5 class="card-title">{{menu.name}}</h5>
         <p class="card-text text-bold">₩ {{menu.price}}</p>
@@ -12,6 +12,20 @@
       </div>
     </div>
     {% endfor %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if page >= 5 %}
+        <li class="page-item"><a class="page-link" href="/order/recommend/{{path.split("/")[2]}}?page={{page-3 if page else "0"}}">Previous</a></li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="/order/recommend/{{path.split("/")[2]}}?page={{page-1 if page else "1"}}">{{page if page else 1}}</a></li>
+        <li class="page-item"><a class="page-link" href="/order/recommend/{{path.split("/")[2]}}?page={{page if page else "2"}}">{{page if page else 2}}</a></li>
+        <li class="page-item"><a class="page-link" href="/order/recommend/{{path.split("/")[2]}}?page={{page+1 if page else "3"}}">{{page if page else 3}}</a></li>
+
+        {% if page <= maxPage %}
+        <li class="page-item"><a class="page-link" href="/order/recommend/{{path.split("/")[2]}}?page={{page+3 if page else "5"}}">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
   </div>
 </div>
 {% endblock %}
