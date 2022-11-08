@@ -1,17 +1,60 @@
 {% extends "boilerplate.html" %} {% block body %}
-<div class="container recommendation text-center">
-  <h2 class="mt-5">★ 추천 메뉴 ★</h2>
-  <div class="row text-center">
-    {% for menu in recMenus %}
-    <div class="card col-md-4 mx-auto mt-3" style="width: 18rem">
-      <img src="/static/img/{{menu.img}}" class="card-img-top" alt="..." />
-      <div class="card-body text-center">
-        <h5 class="card-title">{{menu.name}}</h5>
-        <p class="card-text text-bold">₩ {{menu.price}}</p>
-        <a href="/order/item/{{menu._id}}" class="btn btn-primary">선택</a>
+<div class="d-flex">
+  <div class="container recommendation text-center">
+    <h2 class="mt-5">★ 추천 메뉴 ★</h2>
+    <a
+      href="/order/{{path}}?page={{ page|int - 1 }}"
+      style="{{'' if page|int > 1 else 'pointer-events: none; opacity: 0'}}"
+    >
+      <img
+        src="/static/img/left.png"
+        style="width: 100px"
+        class="rounded float-start page-button my-auto mt-5 justify-content-center"
+        alt="..."
+      />
+    </a>
+    <a
+      href="/order/{{path}}?page={{ page|int + 1 }}"
+      style="{{'' if page|int + 1 < maxPage|int else 'pointer-events: none; opacity: 0'}}"
+    >
+      <img
+        src="/static/img/right.png"
+        style="width: 100px"
+        class="rounded float-end page-button my-auto mt-5 justify-content-center"
+        alt="..."
+      />
+    </a>
+    <div class="row text-center">
+      {% for menu in recMenus %}
+      <div class="card col-md-4 mx-auto mt-3" style="width: 18rem">
+        <img src="/static/img/{{menu.img}}" class="card-img-top" alt="..." />
+        <div class="card-body text-center">
+          <h5 class="card-title">{{menu.name}}</h5>
+          <p class="card-text text-bold">₩ {{menu.price}}</p>
+          <a href="/order/item/{{menu._id}}" class="btn btn-primary">선택</a>
+        </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+    <nav aria-label="Page navigation example d-flex">
+      <ul class="pagination justify-content-center mt-5">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        {% for i in range(1, maxPage) %}
+        <li class="page-item {{ 'active' if page|int == i else ''}}">
+          <a class="page-link" href="/order/{{path}}?page={{i}}">{{i}}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
 {% endblock %}

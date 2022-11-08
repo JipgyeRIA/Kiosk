@@ -133,7 +133,7 @@ def face_age_gender_checker(cam_stream, margin = 30):
         # return 1,frame,""
 
         if len(face_loc) == 0:
-            return -1, None,None
+            return -1
         else:
             tmp_age = []
             tmp_gender = []

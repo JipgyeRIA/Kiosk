@@ -17,7 +17,6 @@ def renderHome():
 
 @order_router.get('/item/<item_id>')
 def renderItemDetail(item_id):
-  print("ORDER!!!!")
   response = requests.get(server_url + "/order/item/" + item_id)
   result = response.json()
   item = result['item']
@@ -28,50 +27,60 @@ def renderItemDetail(item_id):
 
 @order_router.route('/recommend/all')
 def renderRecommendHome():
-  response = requests.get(server_url + "/order/recommend/all")
+  page = request.args.get('page')
+  response = requests.get(server_url + "/order/recommend/all?page=" + page)
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  maxPage = result['maxPage']
   
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/set-menu')
 def renderSetMenuHome():
-  response = requests.get(server_url + "/order/recommend/set-menu")
+  page = request.args.get('page')
+  response = requests.get(server_url + "/order/recommend/set-menu?page=" + page)
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  maxPage = result['maxPage']
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/single-menu')
 def renderSingleMenuHome():
-  response = requests.get(server_url + "/order/recommend/single-menu")
+  page = request.args.get('page')
+  response = requests.get(server_url + "/order/recommend/single-menu?page=" + page)
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  maxPage = result['maxPage']
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/side-menu')
 def renderSideMenuHome():
-  response = requests.get(server_url + "/order/recommend/side-menu")
+  page = request.args.get('page')
+  response = requests.get(server_url + "/order/recommend/side-menu?page=" + page)
   result = response.json()
   recMenus = result['recMenus']
   path = result['path']
+  maxPage = result['maxPage']
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/group')
 def recommendGroupMenu():
   emb = get_single_face_data(cam_stream)
+  page = request.args.get('page')
   if emb == -1:
     response = requests.get(server_url + "/order/recommend/all")
     result = response.json()
     recMenus = result['recMenus']
     path = result['path']
+    maxPage = result['maxPage']
     
-    return render_template('order/recommend.html', recMenus=recMenus, path=path)
+    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
   
   else:
     body = json.dumps({"emb": emb})
@@ -79,27 +88,31 @@ def recommendGroupMenu():
     result = response.json()
 
     if result['result'] is False:
-      path = "order/home";
-      return render_template('index.html', path=path)
-    
+      return redirect('/order/recommend/single?page=1')
+
+    maxPage = result['maxPage']
     recMenus = result['recMenus']
     path = result['path']
     
-    return render_template('order/recommend.html', recMenus=recMenus, path=path)
+    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 @order_router.route('/recommend/single')
 def recommendSingleMenu():
+  page = request.args.get('page')
   single_info = face_age_gender_checker(cam_stream)
   if single_info == -1:
     path = "order/home";
     return render_template('index.html', path=path)
 
-  response = requests.post(server_url + "/order/recommend/single", data=json.dumps({"single_info": single_info}), headers= {"content-type": "application/json"})
+  response = requests.post(server_url + "/order/recommend/single?page=" + page, data=json.dumps({"single_info": single_info}), headers= {"content-type": "application/json"})
   result = response.json()  
   recMenus = result['recMenus']
   path = result['path']
+  maxPage = result['maxPage']
+  print(session)
+  print(request.cookies)
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
 
 # @order_router.route('/recommend/group')
 # def recommendGroupMenu():

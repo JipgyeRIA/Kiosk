@@ -10,30 +10,30 @@
     </li>
     <li class="nav-item mt-5">
       <a
-        class="nav-link {{ 'active' if path|length >= 3 and path.split('/')[2]  == 'all' else '' }}"
+        class="nav-link {{ 'active' if path|length >= 3 and path.split('/')[2]  in ('all', 'single', 'group') else '' }}"
         aria-current="page"
-        href="/order/recommend/all"
+        href="/order/recommend/all?page=1"
         >추천 메뉴</a
       >
     </li>
     <li class="nav-item mt-5">
       <a
         class="nav-link {{ 'active' if path|length >= 3 and path.split('/')[2]  == 'set-menu' else '' }}"
-        href="/order/recommend/set-menu"
+        href="/order/recommend/set-menu?page=1"
         >세트 메뉴</a
       >
     </li>
     <li class="nav-item mt-5">
       <a
         class="nav-link {{ 'active' if path|length >= 3 and path.split('/')[2]  == 'single-menu' else '' }}"
-        href="/order/recommend/single-menu"
+        href="/order/recommend/single-menu?page=1"
         >단품</a
       >
     </li>
     <li class="nav-item mt-5">
       <a
         class="nav-link {{ 'active' if path|length >= 3 and path.split('/')[2]  == 'side-menu' else '' }}"
-        href="/order/recommend/side-menu"
+        href="/order/recommend/side-menu?page=1"
         >사이드, 음료</a
       >
     </li>
