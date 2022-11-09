@@ -147,7 +147,7 @@ def face_age_gender_checker(cam_stream, margin = 30):
                     detector_backend="dlib")
 
                 tmp_age.append(age_labeler(response["age"]))
-                tmp_gender.append(0 if response["gender"] else 1)
+                tmp_gender.append(0 if response["gender"] == "Man" else 1)
             answer = {
                 "population" : len(tmp_age),
                 "ages" : tmp_age,
