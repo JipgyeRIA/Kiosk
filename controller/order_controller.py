@@ -79,8 +79,12 @@ def recommendGroupMenu():
     recMenus = result['recMenus']
     path = result['path']
     maxPage = result['maxPage']
+    population = result['population']
+    men = result['men']
+    women = result['women']
+    ages = result['ages']
     
-    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
+    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage, population=population, men=men, women=women, ages=ages)
   
   else:
     body = json.dumps({"emb": emb})
@@ -93,8 +97,12 @@ def recommendGroupMenu():
     maxPage = result['maxPage']
     recMenus = result['recMenus']
     path = result['path']
+    population = result['population']
+    men = result['men']
+    women = result['women']
+    ages = result['ages']
     
-    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
+    return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage, population=population, men=men, women=women, ages=ages)
 
 @order_router.route('/recommend/single')
 def recommendSingleMenu():
@@ -109,10 +117,15 @@ def recommendSingleMenu():
   recMenus = result['recMenus']
   path = result['path']
   maxPage = result['maxPage']
+  population = result['population']
+  men = result['men']
+  women = result['women']
+  ages = result['ages']
+
   print(session)
   print(request.cookies)
 
-  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage)
+  return render_template('order/recommend.html', recMenus=recMenus, path=path, page=page, maxPage=maxPage, population=population, men=men, women=women, ages=ages)
 
 # @order_router.route('/recommend/group')
 # def recommendGroupMenu():

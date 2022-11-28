@@ -2,6 +2,21 @@
 <div class="d-flex">
   <div class="container recommendation text-center">
     <h2 class="mt-5">★ 추천 메뉴 ★</h2>
+    {% if population and ages|count > 0 and men >= 0 and women >= 0 %}
+    <p>인원수: {{ population }}</p>
+    {% if men > 0 %}
+    <p>남자: {{ men }} 명</p>
+    {% endif %} {% if women > 0 %}
+    <p>여자: {{ women }} 명</p>
+    {% endif %}
+    <p>
+      나이대: {% for age in ages %} {% if age == 0 %} 0 ~ 10 (세), {% elif age
+      == 1 %} 11 ~ 32 (세) {% elif age == 2 %} 33 ~ 60 (세) {% elif age == 3 %}
+      60 ~ (세) {% endif %} {% endfor %}
+    </p>
+    {% else %}
+    <p>인식 정보가 존재하지 않습니다.</p>
+    {% endif %}
     <a
       href="/order/{{path}}?page={{ page|int - 1 }}"
       style="{{'' if page|int > 1 else 'pointer-events: none; opacity: 0'}}"
